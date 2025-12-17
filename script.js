@@ -178,4 +178,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+
+    // --- 4. MOBILE MENU TOGGLE ---
+    const hamburger = document.querySelector(".hamburger-btn");
+    const nav = document.querySelector(".main-nav");
+
+    if (hamburger && nav) {
+        hamburger.addEventListener("click", () => {
+            hamburger.classList.toggle("toggle");
+            nav.classList.toggle("nav-active");
+        });
+
+        // Close menu when clicking a link
+        const navLinks = document.querySelectorAll(".nav-link");
+        navLinks.forEach(link => {
+            link.addEventListener("click", () => {
+                hamburger.classList.remove("toggle");
+                nav.classList.remove("nav-active");
+            });
+        });
+    }
+
 });

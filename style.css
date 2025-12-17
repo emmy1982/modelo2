@@ -690,7 +690,21 @@ img {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .huge-text {
-        font-size: 18vw;
+        font-size: 15vw;
+    }
+
+
+
+    .hero-info h3 {
+        font-size: 2rem;
+    }
+
+    .hero-info p {
+        font-size: 1.5rem;
+    }
+
+    .hero-text {
+        border: none;
     }
 
     .hero-grid {
@@ -720,10 +734,252 @@ img {
         flex-direction: column;
     }
 
+    .resp-title-about {
+        font-size: 2rem;
+    }
+
     .section {
-        height: auto;
-        min-height: 100vh;
-        padding-bottom: 4rem;
-        /* Ensure scrolling works */
+
+        .team-left,
+        .team-right {
+            flex: auto;
+            width: 100%;
+            padding: 2rem;
+        }
+
+        .huge-text-team {
+            font-size: 18vw;
+        }
+
+        .team-number-wrapper {
+            margin-top: 4rem;
+        }
+
+        .section-team {
+            height: auto !important;
+            /* Allow scroll on mobile */
+        }
+    }
+
+
+    /* Stages/Contact Styles */
+    .stages-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+    }
+
+    /* Hero Visibility Toggles */
+    .hero-mobile {
+        display: none;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 900px) {
+
+        /* Hide Desktop Hero */
+        .hero-desktop {
+            display: none;
+        }
+
+        /* Show Mobile Hero */
+        .hero-mobile {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100vh;
+            padding: 2rem 2rem 2rem 2rem;
+            position: relative;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        /* Mobile Header Top Fix */
+        .header-top {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: auto;
+            z-index: 2000;
+            padding: 0;
+            margin: 0;
+            /* Reset any negative margins */
+        }
+
+        /* Mobile Hero Styling */
+        .mobile-title-top {
+            font-size: 19vw;
+            line-height: 0.9;
+            z-index: 10;
+        }
+
+        .mobile-hero-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120%;
+            /* Wider than screen for effect */
+            height: 80%;
+            z-index: 1;
+            /* Behind text but above bg */
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .mobile-hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .mobile-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 10;
+            margin-top: 1rem;
+        }
+
+        .mobile-info h3 {
+            font-size: 2rem;
+        }
+
+        .mobile-text {
+            display: block;
+            /* Show text */
+            z-index: 10;
+            margin-top: 1rem;
+            max-width: 90%;
+        }
+
+        .mobile-text p {
+            font-size: 1rem;
+            line-height: 1.4;
+            color: #333;
+            /* Ensure readability */
+            font-weight: 500;
+        }
+
+        .mobile-title-bottom {
+            font-size: 19vw;
+            text-align: right;
+            line-height: 0.9;
+            z-index: 10;
+            margin-top: auto;
+            color: var(--bg-color);
+            text-shadow: 2px 2px 10px rgba(57, 57, 57, 0.5);
+            padding-bottom: 8rem;
+        }
+
+        /* Other section adjustments */
+        .huge-text-team {
+            font-size: 18vw;
+        }
+
+        .team-number-wrapper {
+            margin-top: 4rem;
+        }
+
+        .section-team {
+            height: auto !important;
+        }
+
+        /* Reset grids for other sections */
+        .about-grid,
+        .team-grid,
+        .stages-container,
+        .contact-layout {
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .section-header {
+            flex-direction: column;
+        }
+
+        .section {
+            height: auto;
+            min-height: 100vh;
+            padding-bottom: 4rem;
+        }
+    }
+}
+
+/* --- Hamburger Menu & Mobile Nav --- */
+
+.hamburger-btn {
+    display: none;
+    /* Hidden on desktop */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+    /* Above nav */
+    padding: 0;
+}
+
+.hamburger-btn span {
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+/* Specific Mobile Navigation Styles */
+@media (max-width: 900px) {
+    .header-top {
+        align-items: center;
+        margin-right: -20px;
+        margin-top: 20px;
+        /* consistent spacing */
+    }
+
+    .hamburger-btn {
+        display: flex;
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        /* Full width or partial 70% */
+        height: 100vh;
+        background-color: #fff;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 3rem;
+        transform: translateX(100%);
+        transition: transform 0.4s ease-in-out;
+        z-index: 1000;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .main-nav.nav-active {
+        transform: translateX(0);
+    }
+
+    .nav-link {
+        font-size: 2rem;
+        /* Larger text for mobile */
+    }
+
+    /* Hamburger Animation when Active */
+    .hamburger-btn.toggle span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 6px);
+    }
+
+    .hamburger-btn.toggle span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger-btn.toggle span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -6px);
     }
 }
