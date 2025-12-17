@@ -1,0 +1,729 @@
+:root {
+    --bg-color: #f4f4f4;
+    --text-color: #111;
+    --accent-color: #888;
+    --font-heading: 'Anton', sans-serif;
+    /* Impactful font */
+    --font-body: 'Inter', sans-serif;
+    --section-padding: 4rem 2rem;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: var(--font-body);
+    overflow-x: hidden;
+}
+
+/* 
+   CORE STACKING LOGIC
+   Each section is sticky and 100vh.
+   They must have a background color to cover the previous one.
+*/
+.section {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: var(--bg-color);
+    /* Important for stacking */
+    border-bottom: 1px solid #ddd;
+    /* Visual separator */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    /* Prevent overflow from animations */
+    box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.05);
+    /* Shadow to imply depth */
+}
+
+/* Alternating backgrounds for visual distinction if needed, 
+   but keeping it white/grey is more clean as per reference. 
+   Maybe slightly different shades.
+*/
+.section-hero {
+    background-color: #f4f4f4;
+    z-index: 1;
+}
+
+.section-about {
+    background-color: #f9f9f9;
+    z-index: 2;
+}
+
+.section-team {
+    background-color: #f4f4f4;
+    z-index: 3;
+}
+
+.section-concept {
+    background-color: #f9f9f9;
+    z-index: 4;
+}
+
+.section-stages {
+    background-color: #f4f4f4;
+    z-index: 5;
+}
+
+.section-contact {
+    background-color: #111;
+    color: #fff;
+    z-index: 6;
+}
+
+/* Dark Footer */
+
+.content-wrapper {
+    max-width: 1600px;
+    width: 100%;
+    margin: 0 auto;
+    padding: var(--section-padding);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* Typography */
+.huge-text {
+    font-family: var(--font-heading);
+    font-size: 12vw;
+    line-height: 0.85;
+    text-transform: uppercase;
+    color: #111;
+    margin: 0;
+}
+
+.section-title {
+    font-family: var(--font-heading);
+    font-size: 9vw;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+    border-right: 3px solid black;
+    padding-right: 10rem;
+}
+
+.section-number {
+    font-family: var(--font-heading);
+    font-size: 6rem;
+}
+
+.small-caps {
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 1rem;
+    display: block;
+}
+
+p {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    max-width: 60ch;
+}
+
+img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    filter: grayscale(100%);
+    /* Force B&W */
+}
+
+.pb {
+    padding-bottom: 4rem;
+}
+
+/* Hero Specifics */
+.section-hero .content-wrapper {
+    padding-bottom: 0;
+    padding-right: 0;
+    max-width: none;
+    /* Ensure full width */
+}
+
+.header-top {
+    display: flex;
+    justify-content: flex-end;
+    padding-bottom: 2rem;
+    /* border-bottom: 1px solid #ccc; */
+    margin-bottom: 2rem;
+    margin-right: 5rem;
+}
+
+.section-hero .header-top {
+    padding-right: 2rem;
+}
+
+.main-nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-color);
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--accent-color);
+}
+
+.hero-grid {
+    display: flex;
+    justify-content: space-between;
+    /* Space out left and right content */
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    /* Text on top */
+    pointer-events: none;
+    /* Let clicks pass to background if needed */
+}
+
+/* Layer 1: Background Image */
+.hero-bg-image {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 75%;
+    /* User requested large image */
+    height: 83%;
+    z-index: 1;
+    margin: auto 0;
+}
+
+.hero-bg-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-left {
+    flex: 0 0 auto;
+    /* Allow it to take necessary width */
+    padding: 1rem 0 3rem 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    pointer-events: auto;
+    /* Re-enable clicks */
+    position: relative;
+    top: -15%;
+}
+
+.hero-text {
+    margin-top: 5rem;
+    padding-bottom: 6rem;
+    max-width: 400px;
+    text-align: justify;
+    border-bottom: 3px solid black;
+}
+
+/* Remove old centered/image classes if unused */
+.hero-center {
+    display: none;
+}
+
+.image-container {
+    display: none;
+}
+
+.hero-right {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 3rem;
+    pointer-events: auto;
+}
+
+.hero-right h1 {
+    color: #fff;
+    mix-blend-mode: difference;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* Optional style for better visibility */
+}
+
+.hero-info h3 {
+    font-family: var(--font-heading);
+    font-size: 4rem;
+    margin-bottom: 0.5rem;
+}
+
+.hero-info p {
+    font-size: 2rem;
+}
+
+.align-right {
+    text-align: right;
+}
+
+
+
+/* About Specifics */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    /* border-bottom: 2px solid #111; */
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 4rem;
+    align-items: center;
+    height: 100%;
+}
+
+.about-grid.reverse {
+    grid-template-columns: 2fr 1fr;
+}
+
+.box-number {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 550px;
+    padding-left: 3rem;
+    border-bottom: 3px solid black;
+    padding-bottom: 2rem;
+}
+
+.box-number-text {
+    text-align: justify;
+}
+
+.mx {
+    max-width: 600px;
+}
+
+/* Team Specifics - Redesign */
+.section-team {
+    padding: 0 !important;
+    /* Override default section padding to allow full bleed */
+    background-color: #fff;
+}
+
+.team-split-layout {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+/* LEFT SIDE (60%) */
+.team-left {
+    flex: 6;
+    /* 60% */
+    background-color: #f4f4f4;
+    padding: 4rem 4rem 4rem 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    border-right: 1px solid #ddd;
+}
+
+.team-header-group {
+    margin-top: 2rem;
+}
+
+.huge-text-team {
+    font-family: var(--font-heading);
+    font-size: 11vw;
+    /* Massive size like "OUR TEAM." */
+    line-height: 0.8;
+    text-transform: uppercase;
+    color: #000;
+    margin: 0;
+    letter-spacing: -2px;
+}
+
+.team-subtitle {
+    font-family: var(--font-heading);
+    font-size: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 1rem;
+    display: block;
+    color: #111;
+}
+
+.team-left-description {
+    margin-top: auto;
+    margin-bottom: 4rem;
+    padding-left: 2rem;
+    border-left: 2px solid #000;
+    max-width: 500px;
+}
+
+.team-divider-text {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    line-height: 1.4;
+    color: #333;
+}
+
+.team-number-wrapper {
+    margin-top: 2rem;
+    position: relative;
+    width: 60%;
+}
+
+.number-line {
+    width: 100%;
+    height: 3px;
+    background-color: var(--text-color);
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+}
+
+.huge-number {
+    font-family: var(--font-heading);
+    font-size: 10rem;
+    color: #000;
+    line-height: 0.8;
+    padding: 2rem;
+}
+
+/* RIGHT SIDE (40%) */
+.team-right {
+    flex: 4;
+    /* 40% */
+    background-color: #e6e6e6;
+    /* Light gray */
+    padding: 6rem 4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.team-right-text p {
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    text-align: justify;
+    max-width: 300px;
+    margin-left: auto;
+}
+
+.team-gallery {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: -15rem;
+    /* Overlap the left section */
+    position: relative;
+    z-index: 10;
+}
+
+.team-photo {
+    flex: 1;
+    aspect-ratio: 1.3/1.5;
+    /* Portraitish */
+    overflow: hidden;
+}
+
+.team-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+.team-photo img:hover {
+    filter: grayscale(0%);
+}
+
+.team-right-footer p {
+    text-align: right;
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    color: #111;
+    margin-top: 2rem;
+}
+
+.fases {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.flex-row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-left: 6rem;
+}
+
+.flex-row h3 {
+    font-family: var(--font-body);
+    font-size: 2rem;
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.flex-row p {
+    text-align: justify;
+    max-width: 550px;
+}
+
+.number-04 {
+    font-size: 10rem;
+}
+
+.column {
+    width: 100%;
+    display: flex;
+}
+
+.description-fases {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    text-transform: uppercase;
+}
+
+.stage-item h3 {
+    font-family: var(--font-body);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.stage-item p {
+    margin-bottom: 0.5rem;
+}
+
+/* Mobile Responsive */
+@media (max-width: 900px) {
+    .team-split-layout {
+        flex-direction: column;
+    }
+
+    .team-left,
+    .team-right {
+        flex: auto;
+        width: 100%;
+        padding: 2rem;
+    }
+
+    .huge-text-team {
+        font-size: 18vw;
+    }
+
+    .team-number-wrapper {
+        margin-top: 4rem;
+    }
+
+    .section-team {
+        height: auto !important;
+        /* Allow scroll on mobile */
+    }
+}
+
+
+
+/* Stages/Contact Styles */
+.stages-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+}
+
+/* Contact Layout Redesign */
+.section-contact {
+    padding: 0 !important;
+    /* Full bleed */
+    display: flex;
+    flex-direction: column;
+    background-color: #111;
+}
+
+.contact-split {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.contact-left {
+    flex: 4;
+    /* 40% Width for text */
+    padding: 6rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+.huge-contact-title {
+    font-family: var(--font-heading);
+    font-size: 10vw;
+    line-height: 0.85;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 4rem;
+}
+
+.contact-details {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.contact-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.contact-item .label {
+    font-family: var(--font-body);
+    font-size: 1.1rem;
+    color: #888;
+    text-transform: capitalize;
+}
+
+.contact-item p {
+    font-family: var(--font-body);
+    font-size: 1.2rem;
+    color: #fff;
+    line-height: 1.4;
+    white-space: nowrap;
+}
+
+.contact-footer-text {
+    margin-top: auto;
+    padding-top: 4rem;
+}
+
+.contact-footer-text a {
+    color: #fff;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: bold;
+}
+
+.contact-footer-text a:hover {
+    color: #ffcc00;
+}
+
+.contact-footer-text p {
+    font-size: 0.9rem;
+    color: #666;
+    max-width: 400px;
+}
+
+.contact-right {
+    flex: 6;
+    /* 60% Width for image */
+    position: relative;
+    height: 100%;
+    overflow: hidden;
+}
+
+.contact-image-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.contact-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+}
+
+/* Mobile Responsive Contact */
+@media (max-width: 900px) {
+    .contact-split {
+        flex-direction: column;
+    }
+
+    .contact-left {
+        flex: auto;
+        padding: 3rem;
+    }
+
+    .contact-right {
+        height: 50vh;
+    }
+
+    .huge-contact-title {
+        font-size: 18vw;
+    }
+}
+
+/* Helpers */
+.image-container {
+    overflow: hidden;
+    height: 100%;
+    max-height: 60vh;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .huge-text {
+        font-size: 18vw;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+
+    .hero-left,
+    .hero-right {
+        order: 2;
+    }
+
+    .hero-center {
+        order: 1;
+        margin-bottom: 2rem;
+    }
+
+    .about-grid,
+    .team-grid,
+    .stages-container,
+    .contact-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .section-header {
+        flex-direction: column;
+    }
+
+    .section {
+        height: auto;
+        min-height: 100vh;
+        padding-bottom: 4rem;
+        /* Ensure scrolling works */
+    }
+}
