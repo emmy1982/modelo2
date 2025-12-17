@@ -21,6 +21,64 @@ body {
     overflow-x: hidden;
 }
 
+/* --- VIEWPORT TOGGLES --- */
+.desktop-view {
+    display: block;
+    height: 100%;
+    /* Maintain height for desktop layouts */
+}
+
+.mobile-view {
+    display: none;
+}
+
+@media (max-width: 900px) {
+    .desktop-view {
+        display: none !important;
+    }
+
+    .mobile-view {
+        display: flex !important;
+        flex-direction: column;
+        width: 100%;
+        height: auto;
+        padding: 4rem 2rem;
+        background-color: var(--bg-color);
+        /* Match section bg */
+        color: var(--text-color);
+        overflow: visible;
+        box-sizing: border-box;
+    }
+
+    /* Mobile View Generic Styles */
+    .mobile-view h2 {
+        font-family: var(--font-heading);
+        font-size: 3rem;
+        text-transform: uppercase;
+        margin-bottom: 2rem;
+        line-height: 0.9;
+        color: #000;
+    }
+
+    .mobile-view p {
+        font-family: var(--font-body);
+        font-size: 1.1rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+        color: #333;
+    }
+
+    .mobile-view img {
+        width: 100%;
+        height: auto;
+        object-fit: cover;
+        margin: 2rem 0;
+        display: block;
+        border-radius: 4px;
+        /* Optional polish */
+    }
+}
+
 /* 
    CORE STACKING LOGIC
    Each section is sticky and 100vh.
@@ -144,11 +202,35 @@ img {
 }
 
 /* Hero Specifics */
+/* Hero Specifics */
 .section-hero .content-wrapper {
     padding-bottom: 0;
     padding-right: 0;
     max-width: none;
     /* Ensure full width */
+    position: relative;
+    z-index: 20;
+    /* Ensure content wrapper (nav) is above */
+    pointer-events: none;
+    /* Let clicks pass through empty wrapper areas */
+}
+
+.hero-desktop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    pointer-events: none;
+    /* Let clicks pass to interactive elements inside */
+}
+
+/* Re-enable pointer events for interactive children */
+.hero-desktop .hero-left,
+.hero-desktop .hero-right,
+.header-top {
+    pointer-events: auto;
 }
 
 .header-top {
@@ -158,6 +240,9 @@ img {
     /* border-bottom: 1px solid #ccc; */
     margin-bottom: 2rem;
     margin-right: 5rem;
+    position: relative;
+    z-index: 30;
+    /* Topmost */
 }
 
 .section-hero .header-top {
@@ -165,6 +250,7 @@ img {
 }
 
 .main-nav {
+    margin-top: 1.5rem;
     display: flex;
     gap: 2rem;
 }
@@ -224,7 +310,7 @@ img {
     pointer-events: auto;
     /* Re-enable clicks */
     position: relative;
-    top: -15%;
+    top: 10%
 }
 
 .hero-text {
@@ -507,6 +593,7 @@ img {
     font-family: var(--font-heading);
     font-size: 3rem;
     text-transform: uppercase;
+    margin-bottom: 1.5rem;
 }
 
 .stage-item h3 {
@@ -514,7 +601,6 @@ img {
     font-size: 1.5rem;
     text-transform: uppercase;
     font-weight: 300;
-    letter-spacing: 2px;
 }
 
 .stage-item p {
@@ -903,6 +989,55 @@ img {
             min-height: 100vh;
             padding-bottom: 4rem;
         }
+
+        /* Responsive Team Layout */
+        .team-gallery {
+            margin-left: 0;
+            margin-top: 2rem;
+            flex-direction: column;
+        }
+
+        .team-photo {
+            aspect-ratio: auto;
+            height: 400px;
+        }
+
+        /* Responsive Stages Layout */
+        .fases {
+            flex-direction: column;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .column {
+            flex-direction: column;
+        }
+
+        .flex-row {
+            padding-left: 0;
+        }
+
+        .number-04 {
+            font-size: 25vw;
+            align-self: flex-end;
+            line-height: 0.8;
+            margin-top: -2rem;
+        }
+
+        /* Responsive Contact Layout */
+        .contact-details {
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .contact-item p {
+            font-size: 1rem;
+        }
+
+        .contact-left {
+            padding: 3rem 2rem;
+            /* Reduce side padding slightly */
+        }
     }
 }
 
@@ -981,5 +1116,29 @@ img {
 
     .hamburger-btn.toggle span:nth-child(3) {
         transform: rotate(-45deg) translate(5px, -6px);
+    }
+}
+
+/* --- DESKTOP HERO SAFETY NET --- */
+@media (min-width: 901px) {
+    .hero-desktop {
+        display: block !important;
+        /* opacity/visibility removed to allow GSAP animations */
+    }
+
+    .hero-mobile {
+        display: none !important;
+    }
+
+    .header-top {
+        display: flex !important;
+    }
+
+    .main-nav {
+        display: flex !important;
+    }
+
+    .hamburger-btn {
+        display: none !important;
     }
 }
